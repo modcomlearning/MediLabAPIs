@@ -103,6 +103,32 @@ class ViewInvoiceDetails(Resource):
 
 class ChangePass(Resource):
      def post(self):
+          json = request.json
+          nurse_id = json['nurse_id']
+          current_password = json['current_password']
+          new_password = json['new_password']
+          confirm_password = json['confirm_password']
+          # Verify if current password is OK for the nurse_id.
+          # If current password is verified False, Give a message  - current is wrong
+          # If Verified True, then confirm that new password and confirm are same.
+          # If they are not same, Give a message.
+          # if they are same then, hash new password and update under the nurse_id
+          # Give a message password updated.
+          # Go Login with the new password 
+
+
+
+
+
+
+
+
+
+
+
+          
+
+
           pass
 
 
