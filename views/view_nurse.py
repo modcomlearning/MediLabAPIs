@@ -101,7 +101,8 @@ class ViewInvoiceDetails(Resource):
                
 
 
-
+class ChangePass(Resource):
+     pass
 
 
 
