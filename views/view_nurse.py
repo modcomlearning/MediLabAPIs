@@ -102,7 +102,8 @@ class ViewInvoiceDetails(Resource):
 
 
 class ChangePass(Resource):
-     pass
+     def post(self):
+          pass
 
 
 
