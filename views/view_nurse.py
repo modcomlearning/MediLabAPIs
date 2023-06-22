@@ -108,25 +108,59 @@ class ChangePass(Resource):
           current_password = json['current_password']
           new_password = json['new_password']
           confirm_password = json['confirm_password']
-          # Verify if current password is OK for the nurse_id.
-          # If current password is verified False, Give a message  - current is wrong
-          # If Verified True, then confirm that new password and confirm are same.
-          # If they are not same, Give a message.
-          # if they are same then, hash new password and update under the nurse_id
-          # Give a message password updated.
-          # Go Login with the new password 
-
-
-
-
-
-
-
-
-
-
-
+    
+          sql = "select * from nurses where nurse_id = %s"
+          connection = pymysql.connect(host='localhost',
+                                                user='root',
+                                                password='',
+                                                database='medilab')
           
+          cursor = connection.cursor(pymysql.cursors.DictCursor)
+          cursor.execute(sql, nurse_id)
+          count = cursor.rowcount
+          if count == 0:
+                return jsonify({'message': 'Nurse does Not exist'})
+          else:
+               nurse = cursor.fetchone()
+               hashed_password = nurse['password']   # This Password is hashed
+                 # Jane provided a Plain password
+               if hash_verify(current_password, hashed_password):
+                       # You can Update
+                       if new_password != confirm_password:
+                            return jsonify({'message': 'Password Do Not match '})
+                       else:
+                            sql = '''Update nurses Set password = %s where nurse_id = %s'''
+                            cursor = connection.cursor()
+                            data = (hash_password(new_password),nurse_id)
+                            try :
+                                 cursor.execute(sql, data)
+                                 connection.commit()
+                                 return jsonify({'message': 'Password Changed '})
+                            except:
+                                 connection.rollback()
+                                 return jsonify({'message':'Error in Changing the Password'})
+               else:
+                       return jsonify({'message': 'Current Password is Wrong '})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
           pass
