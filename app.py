@@ -8,7 +8,7 @@ app = Flask(__name__)
 from datetime import timedelta
 app.secret_key = "hfjdfhgjkdfhgjkdf865785"
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=1)
-app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(minutes=20)
+app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(minutes=60)
 jwt = JWTManager(app)
 
 
