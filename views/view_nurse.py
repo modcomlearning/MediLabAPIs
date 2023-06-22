@@ -102,7 +102,7 @@ class ViewInvoiceDetails(Resource):
 
 
 class ChangePass(Resource):
-     def post(self):
+     def put(self):
           json = request.json
           nurse_id = json['nurse_id']
           current_password = json['current_password']
@@ -142,7 +142,7 @@ class ChangePass(Resource):
                else:
                        return jsonify({'message': 'Current Password is Wrong '})
 
-
+# https://github.com/modcomlearning/MediLabApis
 
 
 
